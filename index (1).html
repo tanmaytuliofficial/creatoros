@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CreatorOS — Your Content Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">CreatorOS</span>
+      </div>
+      <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">◈</span><span class="nav-label">Dashboard</span>
+      </button>
+      <button class="nav-item" data-page="videos">
+        <span class="nav-icon">▶</span><span class="nav-label">Videos</span>
+      </button>
+      <button class="nav-item" data-page="kanban">
+        <span class="nav-icon">⊞</span><span class="nav-label">Kanban</span>
+      </button>
+      <button class="nav-item" data-page="scripts">
+        <span class="nav-icon">✍</span><span class="nav-label">Scripts</span>
+      </button>
+      <button class="nav-item" data-page="series">
+        <span class="nav-icon">◎</span><span class="nav-label">Series</span>
+      </button>
+      <button class="nav-item" data-page="thumbnails">
+        <span class="nav-icon">◧</span><span class="nav-label">Thumbnails</span>
+      </button>
+      <button class="nav-item" data-page="seo">
+        <span class="nav-icon">◈</span><span class="nav-label">SEO</span>
+      </button>
+      <button class="nav-item" data-page="calendar">
+        <span class="nav-icon">⊡</span><span class="nav-label">Calendar</span>
+      </button>
+      <button class="nav-item" data-page="tasks">
+        <span class="nav-icon">✓</span><span class="nav-label">Tasks</span>
+      </button>
+      <button class="nav-item" data-page="analytics">
+        <span class="nav-icon">⤴</span><span class="nav-label">Analytics</span>
+      </button>
+      <button class="nav-item" data-page="backup">
+        <span class="nav-icon">⊙</span><span class="nav-label">Backup</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">YT</div>
+        <div class="user-info">
+          <div class="user-name">Creator</div>
+          <div class="user-role">Content OS</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <button class="btn-primary" id="globalAddBtn">+ New</button>
+      </div>
+    </header>
+
+    <!-- PAGES -->
+    <div class="pages">
+
+      <!-- DASHBOARD -->
+      <section class="page active" id="page-dashboard">
+        <div class="page-header">
+          <h1 class="page-title">Your Command Center</h1>
+          <p class="page-subtitle">Everything happening in your content world</p>
+        </div>
+        <div class="stat-grid" id="dashboardStats"></div>
+        <div class="section-grid">
+          <div class="section-block">
+            <div class="section-head"><h2>Recent Videos</h2></div>
+            <div id="recentVideos" class="item-list"></div>
+          </div>
+          <div class="section-block">
+            <div class="section-head"><h2>Upcoming Schedule</h2></div>
+            <div id="upcomingVideos" class="item-list"></div>
+          </div>
+        </div>
+        <div class="section-block full-width">
+          <div class="section-head"><h2>Pipeline Overview</h2></div>
+          <div class="pipeline-bar" id="pipelineBar"></div>
+        </div>
+      </section>
+
+      <!-- VIDEOS -->
+      <section class="page" id="page-videos">
+        <div class="page-header">
+          <h1 class="page-title">Video Library</h1>
+          <button class="btn-primary" id="addVideoBtn">+ Add Video</button>
+        </div>
+        <div class="filter-bar">
+          <input type="text" class="search-input" id="videoSearch" placeholder="Search videos..." />
+          <select class="filter-select" id="videoStatusFilter">
+            <option value="">All Statuses</option>
+            <option value="Idea">Idea</option>
+            <option value="Research">Research</option>
+            <option value="Script">Script</option>
+            <option value="Recording">Recording</option>
+            <option value="Editing">Editing</option>
+            <option value="Ready">Ready</option>
+            <option value="Published">Published</option>
+          </select>
+          <select class="filter-select" id="videoSeriesFilter">
+            <option value="">All Series</option>
+          </select>
+        </div>
+        <div class="video-grid" id="videoGrid"></div>
+      </section>
+
+      <!-- KANBAN -->
+      <section class="page" id="page-kanban">
+        <div class="page-header">
+          <h1 class="page-title">Kanban Board</h1>
+          <p class="page-subtitle">Drag cards to update status</p>
+        </div>
+        <div class="kanban-board" id="kanbanBoard"></div>
+      </section>
+
+      <!-- SCRIPTS -->
+      <section class="page" id="page-scripts">
+        <div class="page-header">
+          <h1 class="page-title">Script Manager</h1>
+          <p class="page-subtitle">Write, edit, and track your scripts</p>
+        </div>
+        <div class="script-layout">
+          <div class="script-sidebar">
+            <div class="script-list-head">
+              <span>Scripts</span>
+              <button class="btn-small" id="newScriptBtn">+ New</button>
+            </div>
+            <div id="scriptList" class="script-list"></div>
+          </div>
+          <div class="script-editor-area" id="scriptEditorArea">
+            <div class="script-placeholder">Select a script or create a new one</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERIES -->
+      <section class="page" id="page-series">
+        <div class="page-header">
+          <h1 class="page-title">Series Manager</h1>
+          <button class="btn-primary" id="addSeriesBtn">+ Add Series</button>
+        </div>
+        <div class="series-grid" id="seriesGrid"></div>
+      </section>
+
+      <!-- THUMBNAILS -->
+      <section class="page" id="page-thumbnails">
+        <div class="page-header">
+          <h1 class="page-title">Thumbnail Manager</h1>
+          <p class="page-subtitle">Plan and track your thumbnail creation</p>
+        </div>
+        <div class="video-grid" id="thumbnailGrid"></div>
+      </section>
+
+      <!-- SEO -->
+      <section class="page" id="page-seo">
+        <div class="page-header">
+          <h1 class="page-title">SEO Manager</h1>
+          <p class="page-subtitle">Optimize your video metadata</p>
+        </div>
+        <div class="seo-select-bar">
+          <select class="filter-select wide" id="seoVideoSelect">
+            <option value="">Select a video to optimize...</option>
+          </select>
+        </div>
+        <div id="seoEditor" class="seo-editor hidden"></div>
+      </section>
+
+      <!-- CALENDAR -->
+      <section class="page" id="page-calendar">
+        <div class="page-header">
+          <h1 class="page-title">Content Calendar</h1>
+          <div class="cal-nav">
+            <button class="btn-icon" id="calPrev">‹</button>
+            <span id="calTitle">Month Year</span>
+            <button class="btn-icon" id="calNext">›</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </section>
+
+      <!-- TASKS -->
+      <section class="page" id="page-tasks">
+        <div class="page-header">
+          <h1 class="page-title">Task Manager</h1>
+          <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
+        </div>
+        <div class="task-layout">
+          <div class="task-input-area" id="taskInputArea" style="display:none;">
+            <input type="text" class="task-input-field" id="taskInputField" placeholder="Task title..." />
+            <select class="filter-select" id="taskPriority">
+              <option value="normal">Normal</option>
+              <option value="high">High Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+            <input type="date" class="filter-select" id="taskDueDate" />
+            <button class="btn-primary" id="saveTaskBtn">Save</button>
+            <button class="btn-ghost" id="cancelTaskBtn">Cancel</button>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section class="page" id="page-analytics">
+        <div class="page-header">
+          <h1 class="page-title">Analytics</h1>
+          <p class="page-subtitle">Your content performance at a glance</p>
+        </div>
+        <div class="analytics-grid">
+          <div class="chart-card wide"><canvas id="statusChart"></canvas></div>
+          <div class="chart-card"><canvas id="seriesChart"></canvas></div>
+          <div class="chart-card"><canvas id="completionChart"></canvas></div>
+          <div class="chart-card wide"><canvas id="timelineChart"></canvas></div>
+        </div>
+      </section>
+
+      <!-- BACKUP -->
+      <section class="page" id="page-backup">
+        <div class="page-header">
+          <h1 class="page-title">Backup & Restore</h1>
+          <p class="page-subtitle">Keep your data safe</p>
+        </div>
+        <div class="backup-grid">
+          <div class="backup-card">
+            <div class="backup-icon">⬇</div>
+            <h3>Export Data</h3>
+            <p>Download all your CreatorOS data as a JSON file.</p>
+            <button class="btn-primary" id="exportBtn">Export JSON</button>
+          </div>
+          <div class="backup-card">
+            <div class="backup-icon">⬆</div>
+            <h3>Import Data</h3>
+            <p>Restore data from a previously exported JSON file.</p>
+            <button class="btn-primary" id="importBtn">Import JSON</button>
+            <input type="file" id="importFile" accept=".json" style="display:none;" />
+          </div>
+          <div class="backup-card danger">
+            <div class="backup-icon">⚠</div>
+            <h3>Reset All Data</h3>
+            <p>Permanently delete everything. This cannot be undone.</p>
+            <button class="btn-danger" id="resetBtn">Reset Everything</button>
+          </div>
+        </div>
+        <div class="backup-info" id="backupInfo"></div>
+      </section>
+
+    </div><!-- /pages -->
+  </main>
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="bnav-item active" data-page="dashboard"><span>◈</span><small>Home</small></button>
+    <button class="bnav-item" data-page="videos"><span>▶</span><small>Videos</small></button>
+    <button class="bnav-item" data-page="kanban"><span>⊞</span><small>Kanban</small></button>
+    <button class="bnav-item" data-page="scripts"><span>✍</span><small>Scripts</small></button>
+    <button class="bnav-item" data-page="tasks"><span>✓</span><small>Tasks</small></button>
+    <button class="bnav-item" data-page="analytics"><span>⤴</span><small>Stats</small></button>
+  </nav>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal-box" id="modalBox">
+      <div class="modal-head">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
